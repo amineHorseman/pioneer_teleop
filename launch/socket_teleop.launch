@@ -1,0 +1,11 @@
+<launch>
+
+<include file="$(find pioneer_bringup)/launch/minimal.launch" />
+
+<arg name="port" default="0" />
+<arg name="speed" default="0" />
+<arg name="move_time" default="0.0" />
+
+<node pkg="pioneer_teleop" type="socket_teleop.py" name="socket_teleop" output="screen" args="$(arg port) $(arg speed) $(arg move_time)" />
+
+</launch>

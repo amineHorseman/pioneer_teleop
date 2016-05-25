@@ -1,0 +1,7 @@
+<launch>
+
+<include file="$(find pioneer_bringup)/launch/minimal.launch" />
+
+<node pkg="pioneer_teleop" type="discrete_keyboard_teleop.py" name="discrete_keyboard_teleop" output="screen" />
+
+</launch>

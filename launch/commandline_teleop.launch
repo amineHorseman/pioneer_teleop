@@ -1,0 +1,11 @@
+<launch>
+
+<include file="$(find pioneer_bringup)/launch/minimal.launch" />
+
+<arg name="direction" default="forward" />
+<arg name="speed" default="0" />
+<arg name="move_time" default="0.0" />
+
+<node pkg="pioneer_teleop" type="commandline_teleop.py" name="commandline_teleop" output="screen" args="$(arg direction) $(arg speed) $(arg move_time)" />
+
+</launch>
