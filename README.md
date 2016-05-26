@@ -7,28 +7,31 @@ The package is compatible with any robot using ROS ecosystem, but is originally 
 
 In case you have a different robot, please read "What if my robot is not Pionner-compatible?" section
 
+Note: This package have not yet been tested on ROS Kinetic Kame
+
 # Installation
 
-## Dependencies
+### 1. Dependencies
 
 You need first to get and install pioneer_bringup package, which is available at:
 
-	https://github.com/amine_horseman/pionner_teleop.git
+	https://github.com/amine_horseman/pionner_bringup.git
 
-## Get Source
 
-	Get pioneer_bringup package that allows to launch base functionalities of Pioneer robots
+### 2. Get Source
+
+Download or clone this repository in your caktin workspace:
 
 	$ cd ~/catkin_ws/src
-	$ git clone https://github.com/amineHorseman/pioneer_teleop.git (master branch)
+	$ git clone https://github.com/amineHorseman/pioneer_teleop.git
 	$ rosdep install pioneer_teleop
 
-## Build the catkin packages from source
+### 3. Build the catkin packages from source
 
 	$ cd ~/catkin_ws
 	$ catkin_make
 
-## Make sure that python scripts are executable
+### 4. Make sure that python scripts are executable
 
 	$ cd ~/catkin_ws/src/pioneer_teleop/nodes
 	$ sudo chmod +x *.py
@@ -40,7 +43,7 @@ You need first to get and install pioneer_bringup package, which is available at
 
 In this package, there are three different ways of teleoperation: 
 
-	- Using keyboard: 
+### 1. Keyboard teleoperation: 
 
 		$ roslaunch pioneer_teleop keyboard_teleop.launch
 
@@ -52,11 +55,11 @@ A different version of keyboard teleoperation is also available using this comma
 
 In this case, the robot moves only for a small period of time (1.5 seconds by default) and then stops.
 
-	- Using sockets:
+### 2. Sockets teleoperation:
+
+Controls the robot remotely throught socket commands (especially if you want to move the robot using a web interface via internet/LAN).
 
 		$ roslaunch pionner_teleop socket_teleop.launch
-
-Controls the robot remotely throught socket commands.
 
 The expected commands are "forward", "backward", "left" and "right"
 
@@ -64,11 +67,12 @@ By default, the script listens to port 50001, and the robot moves only for 1.5 s
 
 		$ roslaunch pionner_teleop socket_teleop.launch _port:=12345 _speed:=0.3 _move_time:=2.0
 
-	- Using command lines
+### 3. Command line teleoperation
+
+Useful if you want to move the robot using command line throught a terminal or ssh
 
 		$ roslaunch pionner_teleop socket_commandline.launch _direction:=forward
 
-Useful if you want to teleoperate the robot using command line throught a terminal or ssh
 
 The expected commands (_direction argument) are "forward", "backward", "left" and "right"
 
@@ -81,7 +85,7 @@ By default, the robot moves only for 1.5 seconds at 0.2 speed. To change these p
 This package is compatible with any robot using ROS as long as:
 
 - The velocity commands are published in /cmd_vel topic (see the next section).
-- You modify the .launch scripts to remove the pionner_bringup call, or you use execute directly the python scripts located in /nodes folder.
+- You modify the .launch scripts to remove the pionner_bringup call, or you execute directly the python scripts located in /nodes folder.
 
 # Known issues
 
@@ -91,9 +95,15 @@ By default, the scripts publish velocity commands to /cmd_vel topic.
 
 In case your velocity commands topic has a different name, or you are not using Pionner-compatible robots, you will have to remap your velocity topic to /cmd_vel or change the topic name in the python scripts in /nodes folder
 
+## Other issues
+
+Please report any problem in the [issues panel](https://github.com/amineHorseman/pioneer_teleop/issues)
+
 # TODO
 
 Feel free to contribute to this repository
 
 - Test package in Ros Kinetic Kame
-- Add joystick_teleop node
+- Add joystick_teleop mode
+- Add xbox360_teleop mode
+- Add web page example to use it with socket_teleop
